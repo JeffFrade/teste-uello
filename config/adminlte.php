@@ -114,6 +114,18 @@ return [
             'icon'        => 'dashboard',
             'active'      => ['/dashboard'],
         ],
+        [
+            'text'        => 'Clientes',
+            'url'         => '/clients',
+            'icon'        => 'users',
+            'active'      => ['/clients?*'],
+        ],
+        [
+            'text'        => 'Endereços',
+            'url'         => '/address',
+            'icon'        => 'address-book',
+            'active'      => ['/address?*'],
+        ],
         /*[
             'text'    => 'Multilevel',
             'icon'    => 'share',
