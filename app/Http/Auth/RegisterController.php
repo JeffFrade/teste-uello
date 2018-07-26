@@ -3,7 +3,7 @@
 namespace App\Http\Auth;
 
 use App\Repositories\Models\User;
-use App\Http\Controller;
+use App\Support\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
