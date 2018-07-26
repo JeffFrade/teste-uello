@@ -21,6 +21,8 @@ class CreateEnderecosTable extends Migration
             $table->string('bairro');
             $table->string('cep', 8);
             $table->string('cidade');
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
             $table->softDeletes();
         });
