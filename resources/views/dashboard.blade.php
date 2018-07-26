@@ -7,5 +7,9 @@
 @stop
 
 @section('content')
-    <p>You are logged in!</p>
+    <div class="row">
+        <div class="col-xs-12">
+
+        </div>
+    </div>
 @stop
