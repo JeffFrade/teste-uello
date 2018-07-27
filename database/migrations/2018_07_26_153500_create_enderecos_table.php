@@ -17,7 +17,7 @@ class CreateEnderecosTable extends Migration
             $table->increments('endereco_id');
             $table->string('logradouro');
             $table->integer('numero');
-            $table->string('complemento');
+            $table->string('complemento')->nullable();
             $table->string('bairro');
             $table->string('cep', 8);
             $table->string('cidade');
