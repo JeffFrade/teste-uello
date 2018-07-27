@@ -23,6 +23,7 @@ class CreateEnderecosTable extends Migration
             $table->string('cidade');
             $table->string('latitude');
             $table->string('longitude');
+            $table->integer('cliente_id');
             $table->timestamps();
             $table->softDeletes();
         });
