@@ -31,4 +31,9 @@ class DashboardController extends Controller
 
         return redirect(route('dashboard'));
     }
+
+    public function export()
+    {
+        $this->serviceCsv->export();
+    }
 }

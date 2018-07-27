@@ -33,7 +33,36 @@ class ServiceCsv
         }
     }
 
-    public function storeCliente(array $row)
+    public function export()
+    {
+        $clientes = $this->clienteRepository->all();
+
+        \Excel::create('export', function($excel) use ($clientes) {
+            $excel->sheet('Clientes', function($sheet) use ($clientes) {
+                $sheet->appendRow(array(
+                    'nome',
+                    'email',
+                    'datanasc',
+                    'cpf',
+                    'endereco',
+                    'cep'
+                ));
+
+                foreach ($clientes as $cliente) {
+                    $sheet->appendRow(array(
+                        'nome' => $cliente->nome,
+                        'email' => $cliente->email,
+                        'datanasc' => \DateHelper::formatDate($cliente->data_nascimento),
+                        'cpf' => \StringHelper::mask($cliente->cpf, '###.###.###-##'),
+                        'endereco' => $cliente->endereco->logradouro . ", " . $cliente->endereco->numero . " " . $cliente->endereco->complemento . " - " . $cliente->endereco->bairro . " - " . $cliente->endereco->cidade,
+                        'cep' => \StringHelper::mask($cliente->endereco->cep, '#####-###')
+                    ));
+                }
+            });
+        })->download('csv');
+    }
+
+    private function storeCliente(array $row)
     {
         $clienteData = [
             'nome' => $row['nome'],
@@ -45,7 +74,7 @@ class ServiceCsv
         $this->clienteRepository->create($clienteData);
     }
 
-    public function storeEndereco($data, $cpf)
+    private function storeEndereco($data, $cpf)
     {
         $enderecoTypes = [
             'subpremise' => 'complemento',
