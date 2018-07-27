@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Repositories\ClienteRepository;
 use App\Services\ServiceCsv;
 use App\Support\Controller;
 use Illuminate\Http\Request;
@@ -9,31 +10,25 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     private $serviceCsv;
+    private $clienteRepository;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @param ServiceCsv $serviceCsv
-     *
-     * @return void
-     */
-    public function __construct(ServiceCsv $serviceCsv)
+    public function __construct(ServiceCsv $serviceCsv, ClienteRepository $clienteRepository)
     {
         $this->serviceCsv = $serviceCsv;
+        $this->clienteRepository = $clienteRepository;
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('dashboard');
+        $clientes = $this->clienteRepository->paginate();
+
+        return view('dashboard', compact('clientes'));
     }
 
     public function import(Request $request)
     {
         $this->serviceCsv->import($request->file('csv'));
+
+        return redirect(route('dashboard'));
     }
 }

@@ -10,4 +10,9 @@ class DateHelper
     {
         return Carbon::parse($date)->toDateTimeString();
     }
+
+    public static function formatDate($date, $format = 'd/m/Y')
+    {
+        return Carbon::parse($date)->format($format);
+    }
 }

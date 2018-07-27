@@ -27,6 +27,9 @@ class ServiceCsv
             $data = $this->serviceGeolocation->getCoordinates($row['endereco']);
 
             $this->storeCliente($row);
+
+            $cpf = \StringHelper::removeSpecialChars($row['cpf']);
+            $this->storeEndereco($data, $cpf);
         }
     }
 
@@ -40,5 +43,36 @@ class ServiceCsv
         ];
 
         $this->clienteRepository->create($clienteData);
+    }
+
+    public function storeEndereco($data, $cpf)
+    {
+        $enderecoTypes = [
+            'subpremise' => 'complemento',
+            'street_number' => 'numero',
+            'route' => 'logradouro',
+            'political' => 'bairro',
+            'administrative_area_level_2' => 'cidade',
+            'postal_code' => 'cep',
+        ];
+
+        $row = json_decode($data, true);
+        $row = $row['results'][0];
+
+        $enderecoData = [
+            'latitude' => $row['geometry']['location']['lat'],
+            'longitude' => $row['geometry']['location']['lng'],
+            'cpf' => $cpf,
+        ];
+
+        $endereco = $row['address_components'];
+
+        foreach ($endereco as $item => $value) {
+            if (in_array($value['types'][0], array_flip($enderecoTypes))) {
+                $enderecoData[$enderecoTypes[$value['types'][0]]] = \StringHelper::removeCep($value['long_name']);
+            }
+        }
+
+        $this->enderecoRepository->create($enderecoData);
     }
 }

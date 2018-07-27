@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="box-body">
-                    <table class="table table-stripped table-hover">
+                    <table class="table table-striped table-hover">
                         <thead>
                             <tr>
                                 <th>CPF</th>
@@ -32,12 +32,28 @@
                                 <th>Complemento</th>
                                 <th>Bairro</th>
                                 <th>Cidade</th>
-                                <th>Ações</th>
                             </tr>
                         </thead>
 
                         <tbody>
-
+                            @forelse($clientes as $cliente)
+                                <tr>
+                                    <td>{{ \StringHelper::mask($cliente->cpf, '###.###.###-##') }}</td>
+                                    <td>{{ $cliente->nome }}</td>
+                                    <td>{{ $cliente->email }}</td>
+                                    <td>{{ \DateHelper::formatDate($cliente->data_nascimento) }}</td>
+                                    <td>{{ \StringHelper::mask($cliente->endereco->cep, '#####-###') }}</td>
+                                    <td>{{ $cliente->endereco->logradouro }}</td>
+                                    <td>{{ $cliente->endereco->numero }}</td>
+                                    <td>{{ $cliente->endereco->complemento ?? '-' }}</td>
+                                    <td>{{ $cliente->endereco->bairro }}</td>
+                                    <td>{{ $cliente->endereco->cidade }}</td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="10">Não há dados</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -45,7 +61,7 @@
                 <div class="box-footer">
                     <div class="row">
                         <div class="container-fluid">
-
+                            {{ $clientes->render() }}
                         </div>
                     </div>
 
