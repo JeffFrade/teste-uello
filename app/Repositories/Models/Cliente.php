@@ -17,6 +17,6 @@ class Cliente extends Model
 
     public function endereco()
     {
-        return $this->belongsTo(Endereco::class, 'cliente_id', 'cliente_id');
+        return $this->belongsTo(Endereco::class, 'cpf', 'cpf');
     }
 }

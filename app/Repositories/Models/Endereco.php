@@ -9,11 +9,11 @@ class Endereco extends Model
     protected $table = 'enderecos';
     protected $primaryKey = 'endereco_id';
     protected $fillable = [
-        'logradouro', 'numero', 'complemento', 'bairro', 'cep', 'cidade', 'latitude', 'longitude', 'cliente_id'
+        'logradouro', 'numero', 'complemento', 'bairro', 'cep', 'cidade', 'latitude', 'longitude', 'cpf'
     ];
 
     public function cliente()
     {
-        return $this->hasOne(Cliente::class, 'cliente_id', 'cliente_id');
+        return $this->hasOne(Cliente::class, 'cpf', 'cpf');
     }
 }
