@@ -61,7 +61,7 @@
                 <div class="box-footer">
                     <div class="row">
                         <div class="container-fluid">
-
+                            {{ $clientes->render() }}
                         </div>
                     </div>
 
