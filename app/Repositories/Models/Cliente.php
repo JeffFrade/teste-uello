@@ -14,4 +14,9 @@ class Cliente extends Model
     protected $fillable = [
         'nome', 'email', 'data_nascimento', 'cpf'
     ];
+
+    public function endereco()
+    {
+        return $this->belongsTo(Endereco::class, 'cliente_id', 'cliente_id');
+    }
 }

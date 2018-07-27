@@ -217,6 +217,7 @@ return [
 
         // Helpers
         'PaginateHelper' => App\Helpers\PaginateHelper::class,
+        'StringHelper' => App\Helpers\StringHelper::class,
     ],
 
 ];
