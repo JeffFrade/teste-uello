@@ -20,4 +20,5 @@ Auth::routes();
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
     Route::post('/dashboard/import', 'DashboardController@import')->name('import');
+    Route::get('/dashboard/export', 'DashboardController@export')->name('export');
 });

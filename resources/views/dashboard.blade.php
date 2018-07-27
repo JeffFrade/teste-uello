@@ -67,7 +67,7 @@
 
                     <div class="row">
                         <div class="container-fluid">
-                            <a href="#" class="btn btn-success pull-left"><i class="fa fa-download"></i> Exportar para CSV</a>
+                            <a href="{{ route('export') }}" class="btn btn-success pull-left"><i class="fa fa-download"></i> Exportar para CSV</a>
                         </div>
                     </div>
                 </div>
